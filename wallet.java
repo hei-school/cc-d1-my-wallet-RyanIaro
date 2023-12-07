@@ -1,4 +1,3 @@
-package wallet;
 import java.util.Scanner;
 
 public class wallet {
@@ -53,7 +52,40 @@ public class wallet {
         showMenu();
     }
 
-    public static void exitProgram() {
+    public static void putInPocket() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nThe wallet is in your pocket. What to do now?");
+        System.out.println("1. Take it out");
+        System.out.println("2. Leave it alone");
+        System.out.println("3. Yeet!");
+        System.out.println(": ");
+        
+        if (scanner.hasNextInt()) {
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("You decide to free the wallet from your pocket.");
+                    showMenu();
+                    break;
+                case 2:
+                    System.out.println("You decide to leave it alone for now.");
+                    putInPocket();
+                    break;
+                    case 3:
+                    yeet();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+                    putInPocket();
+                    break;
+            }
+        } else {
+            System.out.println("Invalid input. Please enter a valid number.");
+            putInPocket();
+        }
+    }
+
+    public static void yeet() {
         System.out.println("You throw the wallet and never see it again, nor get the money inside it back.");
         System.exit(0);
     }
@@ -82,11 +114,10 @@ public class wallet {
                     withdraw();
                     break;
                 case 4:
-                    System.out.println("You put the wallet in your pocket but it couldn't breathe so it came out.");
-                    showMenu();
+                    putInPocket();
                     break;
                 case 5:
-                    exitProgram();
+                    yeet();
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 5.");
