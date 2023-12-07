@@ -7,7 +7,11 @@ const rl = readline.createInterface({
 let balance = 0;
 
 function checkBalance() {
-  console.log(`Your current balance is: ${balance}$`);
+  if(balance != 0) {
+    console.log(`Your current balance is: ${balance}$`);
+  } else {
+    console.log("lmao you broke.");
+  }
   showMenu();
 }
 
@@ -41,7 +45,36 @@ function withdraw() {
   });
 }
 
-function exitProgram() {
+function putInPocket() {
+  console.log(
+    `The wallet is in your pocket. What to do now?
+    1. Take it out
+    2. Leave it there
+    3. Yeet!
+
+    `);
+  rl.question(': ', (choice) => {
+    switch (choice) {
+      case '1':
+        console.log("You decide to free the wallet from your pocket.");
+        showMenu();
+        break;
+      case '2':
+        console.log("You decide to leave it alone for now.");
+        putInPocket();
+        break;
+      case '3':
+        yeet()
+        break;
+      default:
+        console.log('Invalid choice. Please enter a number between 1 and 3.');
+        putInPocket();
+        break;
+    }
+  })
+}
+
+function yeet() {
   console.log('You throw the wallet and never see it again, nor get the money inside it back.');
   rl.close();
 }
@@ -67,11 +100,10 @@ This is your wallet, what do you want to do?(choose a number)
         withdraw();
         break;
       case '4':
-        console.log('You put the wallet in your pocket.');
-        showMenu();
+        putInPocket();
         break;
       case '5':
-        exitProgram();
+        yeet();
         break;
       default:
         console.log('Invalid choice. Please enter a number between 1 and 5.');
